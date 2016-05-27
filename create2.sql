@@ -99,5 +99,4 @@ INSERT INTO RCAR VALUES ('Sméagol',13,3,'maladroit',0.5);
 INSERT INTO RCAR VALUES ('Fléau de Durin',17,1,'peureux', 0.5);
 
 
-
 COMMIT;

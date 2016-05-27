@@ -80,29 +80,22 @@ INSERT INTO RCAR VALUES ('Frodon',20,2,'effrayé',0.65);
 INSERT INTO RCAR VALUES ('Frodon',4,3,'impatient',0.45);
 INSERT INTO RCAR VALUES ('Frodon',10,3,'souffrant',0.95);
 INSERT INTO RCAR VALUES ('Frodon',13,3,'agonisant',0.85);
-
 INSERT INTO RCAR VALUES ('Gimli',22,1,'impétueux',0.99);
 INSERT INTO RCAR VALUES ('Gimli',17,1,'courageux',0.97,);
 INSERT INTO RCAR VALUES ('Gimli',4,3,'téméraire',0.96);
-
 INSERT INTO RCAR VALUES ('Gandalf',12,1,'perspicace',0.80);
 INSERT INTO RCAR VALUES ('Gandalf', 17, 1,'téméraire',0.80);
 INSERT INTO RCAR VALUES ('Gandalf',4,3,'courageux',0.80);
-
 INSERT INTO RCAR VALUES ('Elrond',22,1,'sage',0.80);
 INSERT INTO RCAR VALUES ('Elrond',12, 2,'paisible',0.80);
-
 INSERT INTO RCAR VALUES ('Galadriel',12,2,'paisible',0.75);
-
 INSERT INTO RCAR VALUES ('Legolas',12,2,'paisible',0.78);
 INSERT INTO RCAR VALUES ('Legolas',4,3,'enthousiaste',0.78);
-
 INSERT INTO RCAR VALUES ('Aragorn II',22,1,'courageux',0.93);
 INSERT INTO RCAR VALUES ('Aragorn II', 4,3,'angoissé', 0.93);
 INSERT INTO RCAR VALUES ('Eorl',12,2,'fier', 0.93);
 INSERT INTO RCAR VALUES ('Boromir',22,1,'fou', 0.93);
-
-INSERT INTO RCAR VALUES ('Sméagol',13,3,'maladroit', 0.5);
+INSERT INTO RCAR VALUES ('Sméagol',13,3,'maladroit',0.5);
 INSERT INTO RCAR VALUES ('Fléau de Durin',17,1,'peureux', 0.5);
 
 
