@@ -427,12 +427,14 @@ DELETE FROM RPERS WHERE nomPers in (select nomPers from RCAR where numLivre = '2
 --DELETE 6
 -- Partie 3 : Transactions
 -- user1
+
+--Question 1
 BEGIN
   --Insertion d'un livre
   INSERT INTO RCHAP VALUES (1,0,"Bilbo le hobbit");
 
   --Insertion de nouveaux personnages
-  -- User 1
+
   INSERT INTO RCAR VALUES ('perso2',1, 0, 'lâche', 0.82);
   INSERT INTO RPERS VALUES ('perso1', 'hobbit', 2675);
 
@@ -445,11 +447,50 @@ BEGIN
 
 COMMIT;
 
---user2
 
+--Question 2 : Illustrer un problème de lecture impropre
+
+--user1
 BEGIN
-  SELECT * from RCHAP ;
+--user2
+BEGIN
+--user1
+UPDATE RPERS SET annais=5555 WHERE nomPers='Frodon';
+--user2
+SELECT annais FROM RPERS where nomPers ='Frodon' ;
+--user1
+ROLLBACK;
 
-  SELECT * FROM RPERS ;
+--Question 3 : Illustrer un problème de mise à jour
 
-COMMIT; 
+--user1
+BEGIN
+--user2
+BEGIN
+--user1
+UPDATE RPERS SET annais=5555 WHERE nomPers='Frodon';
+--user2
+UPDATE RPERS SET annais=6666 WHERE nomPers='Frodon' ;
+--user2
+COMMIT;
+--user1
+SELECT annais FROM RPERS where nomPers ='Frodon' ;
+COMMIT;
+
+--Question4 : Illustrer un problème de lecture non reproductible
+
+--user2
+BEGIN
+SELECT annais FROM RPERS where nomPers ='Frodon' ;
+--user1
+BEGIN
+SELECT annais FROM RPERS where nomPers ='Frodon' ;
+--user2
+UPDATE RPERS SET annais=5555 WHERE nomPers='Frodon';
+COMMIT;
+--user1
+SELECT annais FROM RPERS where nomPers ='Frodon';
+
+COMMIT;
+
+--Question5 : Illustrer un problème d'interblocage
