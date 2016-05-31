@@ -10,20 +10,21 @@ CREATE TABLE RPERS (
    nomType TEXT,
    AnNais SMALLINT
    );
-   
+
 CREATE TABLE RTYPE (
-   nomType TEXT PRIMARY KEY REFERENCES RPERS(nomType),
+   nomType TEXT NOT NULL PRIMARY KEY,
    tailleMoy FLOAT,
    imberbe BOOLEAN
+   /*FOREIGN KEY (nomType) REFERENCES RPERS(nomType)*/
    );
-   
+
  CREATE TABLE RCHAP (
    numChap SMALLINT NOT NULL,
    numLivre TEXT NOT NULL,
    titre TEXT,
    PRIMARY KEY (numChap, numLivre)
    );
-   
+
  CREATE TABLE RCAR (
    nomPers TEXT NOT NULL REFERENCES RPERS(nomPers),
    numChap SMALLINT NOT NULL,
@@ -81,7 +82,7 @@ INSERT INTO RCAR VALUES ('Frodon',4,3,'impatient',0.45);
 INSERT INTO RCAR VALUES ('Frodon',10,3,'souffrant',0.95);
 INSERT INTO RCAR VALUES ('Frodon',13,3,'agonisant',0.85);
 INSERT INTO RCAR VALUES ('Gimli',22,1,'impétueux',0.99);
-INSERT INTO RCAR VALUES ('Gimli',17,1,'courageux',0.97,);
+INSERT INTO RCAR VALUES ('Gimli',17,1,'courageux',0.97);
 INSERT INTO RCAR VALUES ('Gimli',4,3,'téméraire',0.96);
 INSERT INTO RCAR VALUES ('Gandalf',12,1,'perspicace',0.80);
 INSERT INTO RCAR VALUES ('Gandalf', 17, 1,'téméraire',0.80);
