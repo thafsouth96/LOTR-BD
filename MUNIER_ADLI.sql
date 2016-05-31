@@ -426,12 +426,13 @@ EXPLAIN DELETE FROM RPERS WHERE nomPers in (select nomPers from RCAR where numLi
 DELETE FROM RPERS WHERE nomPers in (select nomPers from RCAR where numLivre = '2') ;
 --DELETE 6
 -- Partie 3 : Transactions
-
+-- user1
 BEGIN
   --Insertion d'un livre
   INSERT INTO RCHAP VALUES (1,0,"Bilbo le hobbit");
 
   --Insertion de nouveaux personnages
+  -- User 1
   INSERT INTO RCAR VALUES ('perso2',1, 0, 'lâche', 0.82);
   INSERT INTO RPERS VALUES ('perso1', 'hobbit', 2675);
 
@@ -443,3 +444,12 @@ BEGIN
   INSERT INTO RPERS VALUES ('perso4', 'Elfe', 2684);
 
 COMMIT;
+
+--user2
+
+BEGIN
+  SELECT * from RCHAP ;
+
+  SELECT * FROM RPERS ;
+
+COMMIT; 
