@@ -26,12 +26,12 @@ CREATE TABLE RTYPE (
    );
 
  CREATE TABLE RCAR (
-   nomPers TEXT NOT NULL REFERENCES RPERS(nomPers),
+   nomPers TEXT NOT NULL REFERENCES RPERS(nomPers) ON DELETE CASCADE,
    numChap SMALLINT NOT NULL,
    numLivre TEXT NOT NULL,
    traitCar TEXT NOT NULL,
    coefCar FLOAT constraint coef_constraint check(coefCar between 0 and 1),
-   FOREIGN KEY (numChap, numLivre) REFERENCES RCHAP(numChap, numLivre),
+   FOREIGN KEY (numChap, numLivre) REFERENCES RCHAP(numChap, numLivre) ON DELETE CASCADE,
    PRIMARY KEY (nomPers, numChap, numLivre, traitCar)
    );
 

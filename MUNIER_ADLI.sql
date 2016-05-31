@@ -193,6 +193,7 @@ Insert on personnages  (cost=0.00..0.01 rows=1 width=0)
 (2 rows)
 */
 INSERT INTO PERSONNAGES VALUES ('perso1', 'hobbit', 2675, 90, 'no', 'lâche', 0.82, 12, 2, 'L’apprivoisement de Sméagol');
+--INSERT 0 1
 /*
 nompers     | nomtype | annais | taillemoy | imberbe |   traitcar   | coefcar | numchap | numlivre |                  titre
 ----------------+---------+--------+-----------+---------+--------------+---------+---------+----------+-----------------------------------------
@@ -240,6 +241,7 @@ Insert on rpers  (cost=0.00..0.01 rows=1 width=0)
 (2 rows)
 */
 INSERT INTO RPERS VALUES ('perso1', 'hobbit', 2675);
+--INSERT 0 1
 /*
 nompers     | nomtype | annais
 ----------------+---------+--------
@@ -268,6 +270,7 @@ Insert on rcar  (cost=0.00..0.01 rows=1 width=0)
 (2 rows)
 */
 INSERT INTO RCAR VALUES ('perso1',12, 2, 'lâche', 0.82);
+--INSERT 0 1
 /*
 nompers     | numchap | numlivre |   traitcar   | coefcar
 ----------------+---------+----------+--------------+---------
@@ -322,6 +325,7 @@ Index Cond: (nompers = 'Frodon'::text)
 (5 rows)
 */
 UPDATE PERSONNAGES SET annais=2522 WHERE nomPers='Frodon';
+--UPDATE 12
 /*
 nompers     | nomtype | annais | taillemoy | imberbe |   traitcar   | coefcar | numchap | numlivre |                  titre
 ----------------+---------+--------+-----------+---------+--------------+---------+---------+----------+-----------------------------------------
@@ -351,6 +355,7 @@ Index Cond: (nompers = 'Frodon'::text)
 (3 rows)
 */
 UPDATE RPERS SET annais=2522 WHERE nomPers='Frodon';
+--UPDATE 1
 /*
 nompers     | nomtype | annais
 ----------------+---------+--------
@@ -374,6 +379,7 @@ Filter: (numlivre = '2'::text)
 (3 rows)
 */
 DELETE FROM PERSONNAGES WHERE numLivre='2';
+--DELETE 8
 /*
 nompers     | nomtype | annais | taillemoy | imberbe |   traitcar   | coefcar | numchap | numlivre |                  titre
 ----------------+---------+--------+-----------+---------+--------------+---------+---------+----------+-----------------------------------------
@@ -404,18 +410,18 @@ Frodon         | hobbit  |   2522 |        90 | f       | agonisant    |    0.85
 
 --b)
 EXPLAIN DELETE FROM RPERS WHERE nomPers in (select nomPers from RCAR where numLivre = '2') ;
- 
 /*
-QUERY PLAN
+                                     QUERY PLAN                                      
 -------------------------------------------------------------------------------------
-Delete on rpers  (cost=17.66..24.36 rows=425 width=12)
-->  Nested Loop  (cost=17.66..24.36 rows=425 width=12)
-->  HashAggregate  (cost=17.51..17.52 rows=1 width=38)
-Group Key: rcar.nompers
-->  Seq Scan on rcar  (cost=0.00..17.50 rows=3 width=38)
-Filter: (numlivre = '2'::text)
-->  Index Scan using rpers_pkey on rpers  (cost=0.15..6.84 rows=1 width=38)
-Index Cond: (nompers = rcar.nompers)
+ Delete on rpers  (cost=17.66..24.36 rows=425 width=12)
+   ->  Nested Loop  (cost=17.66..24.36 rows=425 width=12)
+         ->  HashAggregate  (cost=17.51..17.52 rows=1 width=38)
+               Group Key: rcar.nompers
+               ->  Seq Scan on rcar  (cost=0.00..17.50 rows=3 width=38)
+                     Filter: (numlivre = '2'::text)
+         ->  Index Scan using rpers_pkey on rpers  (cost=0.15..6.84 rows=1 width=38)
+               Index Cond: (nompers = rcar.nompers)
 (8 rows)
 */
 DELETE FROM RPERS WHERE nomPers in (select nomPers from RCAR where numLivre = '2') ;
+--DELETE 6
