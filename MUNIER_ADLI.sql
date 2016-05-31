@@ -429,14 +429,14 @@ DELETE FROM RPERS WHERE nomPers in (select nomPers from RCAR where numLivre = '2
 -- user1
 
 --Question 1
-BEGIN
+BEGIN;
   --Insertion d'un livre
   INSERT INTO RCHAP VALUES (1,0,"Bilbo le hobbit");
 
   --Insertion de nouveaux personnages
 
   INSERT INTO RCAR VALUES ('perso2',1, 0, 'lâche', 0.82);
-  INSERT INTO RPERS VALUES ('perso1', 'hobbit', 2675);
+  INSERT INTO RPERS VALUES ('perso2', 'hobbit', 2675);
 
 
   INSERT INTO RCAR VALUES ('perso3',1, 0, 'courageux', 0.69);
@@ -451,22 +451,24 @@ COMMIT;
 --Question 2 : Illustrer un problème de lecture impropre
 
 --user1
-BEGIN
+BEGIN;
 --user2
-BEGIN
+BEGIN;
 --user1
 UPDATE RPERS SET annais=5555 WHERE nomPers='Frodon';
 --user2
 SELECT annais FROM RPERS where nomPers ='Frodon' ;
 --user1
 ROLLBACK;
+--user2
+COMMIT;
 
 --Question 3 : Illustrer un problème de mise à jour
 
 --user1
-BEGIN
+BEGIN;
 --user2
-BEGIN
+BEGIN;
 --user1
 UPDATE RPERS SET annais=5555 WHERE nomPers='Frodon';
 --user2
@@ -480,10 +482,10 @@ COMMIT;
 --Question4 : Illustrer un problème de lecture non reproductible
 
 --user2
-BEGIN
+BEGIN;
 SELECT annais FROM RPERS where nomPers ='Frodon' ;
 --user1
-BEGIN
+BEGIN;
 SELECT annais FROM RPERS where nomPers ='Frodon' ;
 --user2
 UPDATE RPERS SET annais=5555 WHERE nomPers='Frodon';
@@ -494,3 +496,15 @@ SELECT annais FROM RPERS where nomPers ='Frodon';
 COMMIT;
 
 --Question5 : Illustrer un problème d'interblocage
+--user1
+LOCK(RPers);
+SELECT annais FROM RPERS where nomPers ='Frodon' ;
+--user2
+LOCK(RTYPE);
+SELECT * FROM RTYPE ;
+--user1
+/*En attente pour que user2 libère RTYPE*/
+SELECT * FROM RTYPE ;
+--user2
+/*En attente pour que user1 libère RPERS*/
+SELECT annais FROM RPERS where nomPers ='Gimli' ;
