@@ -411,7 +411,7 @@ Frodon         | hobbit  |   2522 |        90 | f       | agonisant    |    0.85
 --b)
 EXPLAIN DELETE FROM RPERS WHERE nomPers in (select nomPers from RCAR where numLivre = '2') ;
 /*
-                                     QUERY PLAN                                      
+                                     QUERY PLAN
 -------------------------------------------------------------------------------------
  Delete on rpers  (cost=17.66..24.36 rows=425 width=12)
    ->  Nested Loop  (cost=17.66..24.36 rows=425 width=12)
@@ -425,3 +425,21 @@ EXPLAIN DELETE FROM RPERS WHERE nomPers in (select nomPers from RCAR where numLi
 */
 DELETE FROM RPERS WHERE nomPers in (select nomPers from RCAR where numLivre = '2') ;
 --DELETE 6
+-- Partie 3 : Transactions
+
+BEGIN
+  --Insertion d'un livre
+  INSERT INTO RCHAP VALUES (1,0,"Bilbo le hobbit");
+
+  --Insertion de nouveaux personnages
+  INSERT INTO RCAR VALUES ('perso2',1, 0, 'lâche', 0.82);
+  INSERT INTO RPERS VALUES ('perso1', 'hobbit', 2675);
+
+
+  INSERT INTO RCAR VALUES ('perso3',1, 0, 'courageux', 0.69);
+  INSERT INTO RPERS VALUES ('perso3', 'humain', 2665);
+
+  INSERT INTO RCAR VALUES ('perso4',1, 0, 'peureux', 0.77);
+  INSERT INTO RPERS VALUES ('perso4', 'Elfe', 2684);
+
+COMMIT;
